@@ -1,0 +1,90 @@
+{
+  "name": "can-react-component",
+  "version": "0.0.0",
+  "description": "Create a React component out of a CanComponent.",
+  "homepage": "http://canjs.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/canjs/can-react-component.git"
+  },
+  "author": {
+    "name": "Bitovi",
+    "email": "contact@bitovi.com",
+    "url": "http://bitovi.com"
+  },
+  "scripts": {
+    "preversion": "npm test && npm run build",
+    "version": "git commit -am \"Update dist for release\" && git checkout -b release && git add -f dist/",
+    "postversion": "git push --tags && git checkout master && git branch -D release && git push",
+    "testee": "testee test/test.html --browsers firefox",
+    "test": "npm run eslint && npm run testee",
+    "eslint": "eslint \"**/*.js\" --ignore-pattern \"dist\" --ignore-pattern \"node_modules\"",
+    "release:pre": "npm version prerelease && npm publish",
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "prepublish": "npm run build",
+    "build": "node build.js",
+    "document": "bit-docs",
+    "develop": "done-serve --static --develop --port 8080"
+  },
+  "main": "dist/cjs/can-react-component",
+  "keywords": [
+    "canjs",
+    "canjs-plugin",
+    "donejs",
+    "react"
+  ],
+  "dependencies": {
+    "can-view-scope": "^3.1.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "bit-docs": "0.0.7",
+    "can-component": "^3.0.7",
+    "can-define": "^1.0.25",
+    "can-stache": "^3.0.24",
+    "done-serve": "^1.3.0",
+    "eslint": "^3.18.0",
+    "eslint-plugin-react": "^7.0.1",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "steal": "^1.5.2",
+    "steal-builtins": "^1.0.0",
+    "steal-qunit": "^1.0.0",
+    "steal-tools": "^1.3.5",
+    "testee": "^0.5.1"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2"
+  },
+  "steal": {
+    "main": "can-react-component",
+    "configDependencies": [
+      "live-reload"
+    ],
+    "npmIgnore": [
+      "babel-eslint",
+      "bit-docs",
+      "done-serve",
+      "eslint",
+      "eslint-plugin-react",
+      "testee"
+    ]
+  },
+  "bit-docs": {
+    "dependencies": {
+      "bit-docs-dev": "^0.0.3",
+      "bit-docs-generate-readme": "^0.0.8",
+      "bit-docs-glob-finder": "^0.0.5",
+      "bit-docs-js": "^0.0.3"
+    },
+    "glob": {
+      "pattern": "docs/**/*.{js,md}",
+      "ignore": "node_modules/**/*"
+    },
+    "readme": {
+      "apis": "./docs/apis.json"
+    }
+  }
+}
