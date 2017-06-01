@@ -1,4 +1,4 @@
-@function can-react-component canReactComponent
+@function can-react-component can-react-component
 @parent can-ecosystem
 @description Create a React component out of a [can-component].
 @package ../package.json
