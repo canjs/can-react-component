@@ -1,27 +1,27 @@
-var React = require('react');
-var Scope = require('can-view-scope');
+var React = require("react");
+var Scope = require("can-view-scope");
+var assign = require("can-util/js/assign/assign");
 
 module.exports = function canReactComponent(displayName, CanComponent) {
 	if (arguments.length === 1) {
 		CanComponent = arguments[0];
-		displayName = `${CanComponent.name || 'CanComponent'}Wrapper`;
+		displayName = (CanComponent.name || "CanComponent") + "Wrapper";
 	}
 
-	class Wrapper extends React.Component {
-		static get name() { return displayName; }
+	function Wrapper() {
+		React.Component.call(this);
 
-		constructor() {
-			super();
+		this.canComponent = null;
+		this.createComponent = this.createComponent.bind(this);
+	}
 
-			this.canComponent = null;
-			this.createComponent = this.createComponent.bind(this);
-		}
+	Wrapper.displayName = displayName;
+	Wrapper.prototype = Object.create(React.Component.prototype);
 
-		get viewModel() {
-			return this.canComponent && this.canComponent.viewModel;
-		}
+	assign(Wrapper.prototype, {
+		constructor: Wrapper,
 
-		createComponent(el) {
+		createComponent: function(el) {
 			if (this.canComponent) {
 				this.canComponent = null;
 			}
@@ -29,30 +29,48 @@ module.exports = function canReactComponent(displayName, CanComponent) {
 			if (el) {
 				this.canComponent = new CanComponent(el, {
 					subtemplate: null,
-					templateType: 'react',
+					templateType: "react",
 					parentNodeList: undefined,
 					options: Scope.refsScope().add({}),
 					scope: new Scope.Options({}),
-					setupBindings: (el, makeViewModel, initialViewModelData) => {
+					setupBindings: function(el, makeViewModel, initialViewModelData) {
 						Object.assign(initialViewModelData, this.props);
 						makeViewModel(initialViewModelData);
-					},
+					}.bind(this),
 				});
 			}
-		}
+		},
 
-		componentWillUpdate(props) {
+		componentWillUpdate: function(props) {
 			this.canComponent.viewModel.set(props);
-		}
+		},
 
-		render() {
+		render: function() { // eslint-disable-line react/display-name
 			return React.createElement(CanComponent.prototype.tag, {
 				ref: this.createComponent,
 			});
 		}
-	}
+	});
 
-	Wrapper.displayName = displayName;
+	Object.defineProperty(Wrapper.prototype, "viewModel", {
+		enumerable: false,
+		configurable: true,
+		get: function() {
+			return this.canComponent && this.canComponent.viewModel;
+		}
+	});
+
+	try {
+		Object.defineProperty(Wrapper, "name", {
+			writable: false,
+			enumerable: false,
+			configurable: true,
+			value: displayName
+		});
+	}
+	catch(e) {
+		//
+	}
 
 	return Wrapper;
 };
