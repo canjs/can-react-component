@@ -5,7 +5,7 @@ var assign = require("can-util/js/assign/assign");
 module.exports = function canReactComponent(displayName, CanComponent) {
 	if (arguments.length === 1) {
 		CanComponent = arguments[0];
-		displayName = (CanComponent.name || "CanComponent") + "Wrapper";
+		displayName = (CanComponent.shortName || "CanComponent") + "Wrapper";
 	}
 
 	function Wrapper() {
