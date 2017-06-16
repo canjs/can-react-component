@@ -1,8 +1,9 @@
 var React = require("react");
 var Scope = require("can-view-scope");
 var assign = require("can-util/js/assign/assign");
+var namespace = require('can-namespace');
 
-module.exports = function canReactComponent(displayName, CanComponent) {
+module.exports = namespace.reactComponent = function canReactComponent(displayName, CanComponent) {
 	if (arguments.length === 1) {
 		CanComponent = arguments[0];
 		displayName = (CanComponent.shortName || "CanComponent") + "Wrapper";
