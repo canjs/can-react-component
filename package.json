@@ -28,7 +28,7 @@
     "document": "bit-docs",
     "develop": "done-serve --static --develop --port 8080"
   },
-  "main": "dist/cjs/can-react-component",
+  "main": "can-react-component",
   "keywords": [
     "canjs",
     "canjs-plugin",
