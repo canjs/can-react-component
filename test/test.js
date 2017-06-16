@@ -1,9 +1,12 @@
 import QUnit from 'steal-qunit';
-import React, { Component } from 'react';
+import React /*, { Component } */ from 'react';
 import ReactTestUtils from 'react-dom/test-utils';
 import DefineMap from 'can-define/map/map';
 import CanComponent from 'can-component';
 import stache from 'can-stache';
+
+// old stealjs does not seem to handle named exports properly
+const Component = React.Component;
 
 import canReactComponent from 'can-react-component';
 
@@ -21,7 +24,7 @@ function getTextFromFrag(node) {
 	return txt;
 }
 
-QUnit.module('react-view-model', () => {
+QUnit.module('can-react-component', () => {
 
 	QUnit.test('should be able to consume components', (assert) => {
 
