@@ -35,7 +35,7 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 					options: Scope.refsScope().add({}),
 					scope: new Scope.Options({}),
 					setupBindings: function(el, makeViewModel, initialViewModelData) {
-						Object.assign(initialViewModelData, this.props);
+						assign(initialViewModelData, this.props);
 						makeViewModel(initialViewModelData);
 					}.bind(this),
 				});
