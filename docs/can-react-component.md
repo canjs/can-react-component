@@ -5,14 +5,26 @@
 
 @signature `canReactComponent( displayName, CanComponent )`
 
-```javascript
-export default canReactComponent( 'AppComponent', CanComponent.extend({ ... }) )
+Converts a [can-component] constructor into a React Component and updates the component’s `viewModel` any time the React props change.
+
+```jsx
+import CanComponent from "can-component";
+
+const MyCanComponent = CanComponent.extend({ ... });
+const InnerComponent = canReactComponent( "InnerComponent", MyCanComponent );
+
+ReactDOM.render(
+  <InnerComponent text="inner text" number={ 5 } />,
+  document.getElementById("app")
+)
 ```
 
-Since the component doesn’t produce DOM artifacts of its own, you won’t end up with any wrapper divs or anything to worry about, but in react-device-tools you will see the component with the `displayName` (or defaults to `CanComponentWrapper`) in the tree.
+Values will be passed to the `viewModel` in the same way they would be for a normal React Component, e.g. the `text` prop in the above example would provide the string `"inner text"` to the `viewModel`, `number` would provide the number `5`, etc.
 
-@param {String} displayName The name of the created component
-@param {CanComponent} CanComponent Any Can component
+Since the component doesn’t produce DOM artifacts of its own, you won’t end up with any wrapper divs or anything else to worry about, but [React Developer Tools](https://github.com/facebook/react-devtools) will show you the component with the `displayName` in the React tree.
+
+@param {String} displayName (optional) The name of the created component. If this is not specified, it will be the CanComponent’s name appended with “Wrapper”.
+@param {CanComponent} CanComponent Any [can-component].
 
 @return {ReactComponent} A React component
 
@@ -21,14 +33,14 @@ Since the component doesn’t produce DOM artifacts of its own, you won’t end 
 ## Use
 
 ```jsx
-import React from 'react';
-import CanComponent from 'can-component';
-import canReactComponent from 'can-react-component';
+import React from "react";
+import CanComponent from "can-component";
+import canReactComponent from "can-react-component";
 
 const InnerComponent = canReactComponent(
-  CanComponent.extend('InnerComponent', {
-    tag: 'inner-component',
-    view: stache('<div class="inner">{{text}}</div>')
+  CanComponent.extend("InnerComponent", {
+    tag: "inner-component",
+    view: stache("<div class='inner'>{{text}}</div>")
   })
 );
 
