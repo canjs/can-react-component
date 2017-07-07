@@ -5,9 +5,9 @@
 
 @signature `canReactComponent( displayName, CanComponent )`
 
-Converts a [can-component] constructor into a React Component, and updates the component's viewModel any time the React props change.
+Converts a [can-component] constructor into a React Component and updates the component’s `viewModel` any time the React props change.
 
-```javascript
+```jsx
 import CanComponent from "can-component";
 
 const MyCanComponent = CanComponent.extend({ ... });
@@ -19,11 +19,11 @@ ReactDOM.render(
 )
 ```
 
-Values will be passed to the viewModel in the same way they would be for a normal React Component. IE: the `text` prop in the above example would provide the string `"inner text"` to the viewModel, `number` would provide the number `5`, etc.
+Values will be passed to the `viewModel` in the same way they would be for a normal React Component, e.g. the `text` prop in the above example would provide the string `"inner text"` to the `viewModel`, `number` would provide the number `5`, etc.
 
-Since the component doesn’t produce DOM artifacts of its own, you won’t end up with any wrapper divs or anything to worry about, but in [React Developer Tools](https://github.com/facebook/react-devtools) you will see the component with the `displayName` in the React tree.
+Since the component doesn’t produce DOM artifacts of its own, you won’t end up with any wrapper divs or anything else to worry about, but [React Developer Tools](https://github.com/facebook/react-devtools) will show you the component with the `displayName` in the React tree.
 
-@param {String} displayName (optional) The name of the created component. If this is not specified, it will be the CanComponent's name appended with "Wrapper".
+@param {String} displayName (optional) The name of the created component. If this is not specified, it will be the CanComponent’s name appended with “Wrapper”.
 @param {CanComponent} CanComponent Any [can-component].
 
 @return {ReactComponent} A React component
