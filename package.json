@@ -1,6 +1,6 @@
 {
   "name": "can-react-component",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Create a React component out of a CanComponent.",
   "homepage": "http://canjs.com",
   "repository": {
