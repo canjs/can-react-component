@@ -43,15 +43,25 @@ import stache from "can-stache";
 const InnerComponent = canReactComponent(
   CanComponent.extend("InnerComponent", {
     tag: "inner-component",
-    view: stache("<div class='inner'>{{text}}</div>")
+    view: stache("<div class='inner'>Inner text: {{text}}</div>")
   })
 );
 
 export default class AppComponent extends React.Component {
   render() {
     return (
-      <InnerComponent text="inner text" />
+      <InnerComponent text="hello world" />
     );
   }
 }
 ```
+
+You can play with the above example on JS Bin:
+
+<a class="jsbin-embed" href="https://jsbin.com/cisowob/2/embed?js,output">can-react-component demo on jsbin.com</a>
+
+You can also use this module with [Preact](https://preactjs.com):
+
+<a class="jsbin-embed" href="https://jsbin.com/fexezi/2/embed?js,output">can-react-component demo with Preact on jsbin.com</a>
+
+<script src="https://static.jsbin.com/js/embed.min.js?4.0.4"></script>
