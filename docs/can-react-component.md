@@ -9,6 +9,8 @@ Converts a [can-component] constructor into a React Component and updates the co
 
 ```jsx
 import CanComponent from "can-component";
+import canReactComponent from "can-react-component";
+import ReactDOM from "react-dom";
 
 const MyCanComponent = CanComponent.extend({ ... });
 const InnerComponent = canReactComponent( "InnerComponent", MyCanComponent );
@@ -36,6 +38,7 @@ Since the component doesn’t produce DOM artifacts of its own, you won’t end 
 import React from "react";
 import CanComponent from "can-component";
 import canReactComponent from "can-react-component";
+import stache from "can-stache";
 
 const InnerComponent = canReactComponent(
   CanComponent.extend("InnerComponent", {
@@ -44,7 +47,7 @@ const InnerComponent = canReactComponent(
   })
 );
 
-export default class AppComponent extends Component {
+export default class AppComponent extends React.Component {
   render() {
     return (
       <InnerComponent text="inner text" />
