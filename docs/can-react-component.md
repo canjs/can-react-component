@@ -9,6 +9,8 @@ Converts a [can-component] constructor into a React Component and updates the co
 
 ```jsx
 import CanComponent from "can-component";
+import canReactComponent from "can-react-component";
+import ReactDOM from "react-dom";
 
 const MyCanComponent = CanComponent.extend({ ... });
 const InnerComponent = canReactComponent( "InnerComponent", MyCanComponent );
@@ -36,19 +38,30 @@ Since the component doesn’t produce DOM artifacts of its own, you won’t end 
 import React from "react";
 import CanComponent from "can-component";
 import canReactComponent from "can-react-component";
+import stache from "can-stache";
 
 const InnerComponent = canReactComponent(
   CanComponent.extend("InnerComponent", {
     tag: "inner-component",
-    view: stache("<div class='inner'>{{text}}</div>")
+    view: stache("<div class='inner'>Inner text: {{text}}</div>")
   })
 );
 
-export default class AppComponent extends Component {
+export default class AppComponent extends React.Component {
   render() {
     return (
-      <InnerComponent text="inner text" />
+      <InnerComponent text="hello world" />
     );
   }
 }
 ```
+
+You can play with the above example on JS Bin:
+
+<a class="jsbin-embed" href="https://jsbin.com/cisowob/3/embed?js,output">can-react-component demo on jsbin.com</a>
+
+You can also use this module with [Preact](https://preactjs.com):
+
+<a class="jsbin-embed" href="https://jsbin.com/fexezi/2/embed?js,output">can-react-component demo with Preact on jsbin.com</a>
+
+<script src="https://static.jsbin.com/js/embed.min.js?4.0.4"></script>
