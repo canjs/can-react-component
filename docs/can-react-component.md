@@ -58,7 +58,7 @@ export default class AppComponent extends React.Component {
 
 You can play with the above example on JS Bin:
 
-<a class="jsbin-embed" href="https://jsbin.com/cisowob/2/embed?js,output">can-react-component demo on jsbin.com</a>
+<a class="jsbin-embed" href="https://jsbin.com/cisowob/3/embed?js,output">can-react-component demo on jsbin.com</a>
 
 You can also use this module with [Preact](https://preactjs.com):
 
