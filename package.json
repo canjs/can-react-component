@@ -46,7 +46,7 @@
     "can-component": "^3.0.7",
     "can-define": "^1.0.25",
     "can-stache": "^3.0.24",
-    "detect-cyclic-packages": "^1.0.0",
+    "detect-cyclic-packages": "^1.0.1",
     "done-serve": "^1.3.0",
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^7.0.1",
