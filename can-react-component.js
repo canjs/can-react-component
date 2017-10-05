@@ -1,4 +1,3 @@
-require("./polyfill");
 var React = require("react");
 var Scope = require("can-view-scope");
 var assign = require("can-util/js/assign/assign");
