@@ -4,7 +4,6 @@ import ReactTestUtils from 'react-dom/test-utils';
 import DefineMap from 'can-define/map/map';
 import CanComponent from 'can-component';
 import stache from 'can-stache';
-
 // old stealjs does not seem to handle named exports properly
 const Component = React.Component;
 

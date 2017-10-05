@@ -43,7 +43,7 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 		},
 
 		componentWillUpdate: function(props) {
-			this.canComponent.viewModel.set(props);
+			this.canComponent.viewModel.assign(props);
 		},
 
 		render: function() { // eslint-disable-line react/display-name
