@@ -1,14 +1,15 @@
 import QUnit from 'steal-qunit';
 import React /*, { Component } */ from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
 import DefineMap from 'can-define/map/map';
 import CanComponent from 'can-component';
 import stache from 'can-stache';
-
 // old stealjs does not seem to handle named exports properly
 const Component = React.Component;
 
 import canReactComponent from 'can-react-component';
+
+// must be after 'react-view-model' import for polyfill
+import ReactTestUtils from 'react-dom/test-utils';
 
 function getTextFromFrag(node) {
 	var txt = "";
