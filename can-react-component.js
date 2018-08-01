@@ -1,6 +1,6 @@
 var React = require("react");
 var Scope = require("can-view-scope");
-var assign = require("can-util/js/assign/assign");
+var assign = require("can-assign");
 var namespace = require('can-namespace');
 
 module.exports = namespace.reactComponent = function canReactComponent(displayName, CanComponent) {
