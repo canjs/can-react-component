@@ -30,7 +30,7 @@ QUnit.module('can-react-component', () => {
 		let ViewModel = DefineMap.extend('ViewModel', {
 			first: {
 				type: 'string',
-				value: 'Christopher'
+				default: 'Christopher'
 			},
 			last: 'string',
 			name: {
@@ -64,7 +64,7 @@ QUnit.module('can-react-component', () => {
 		let ViewModel = DefineMap.extend('ViewModel', {
 			first: {
 				type: 'string',
-				value: 'Christopher'
+				default: 'Christopher'
 			},
 			last: 'string',
 			name: {
@@ -95,7 +95,7 @@ QUnit.module('can-react-component', () => {
 		let ViewModel = DefineMap.extend('ViewModel', {
 			first: {
 				type: 'string',
-				value: 'Christopher'
+				default: 'Christopher'
 			},
 			last: 'string',
 			name: {
