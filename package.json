@@ -38,24 +38,24 @@
   "dependencies": {
     "can-assign": "^1.3.1",
     "can-namespace": "^1.0.0",
-    "can-view-scope": "^3.1.1"
+    "can-view-scope": "^4.7.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "bit-docs": "0.0.11",
-    "can-component": "^3.0.7",
-    "can-define": "^1.5.0",
-    "can-stache": "^3.0.24",
+    "can-component": "^4.3.0",
+    "can-define": "^2.5.4",
+    "can-stache": "^4.10.3",
     "detect-cyclic-packages": "^1.1.0",
-    "done-serve": "^1.3.0",
+    "done-serve": "^2.3.0",
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^7.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "steal": "^1.5.2",
+    "steal": "^2.1.1",
     "steal-builtins": "^1.0.0",
     "steal-qunit": "^1.0.0",
-    "steal-tools": "^1.3.5",
+    "steal-tools": "^2.0.3",
     "testee": "^0.8.1"
   },
   "peerDependencies": {
