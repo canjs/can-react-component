@@ -1,6 +1,6 @@
 import QUnit from 'steal-qunit';
-import React /*, { Component } */ from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
+import React from 'react';
+import ReactDOM  from 'react-dom';
 import DefineMap from 'can-define/map/map';
 import CanComponent from 'can-component';
 import stache from 'can-stache';
@@ -23,7 +23,13 @@ function getTextFromFrag(node) {
 	return txt;
 }
 
-QUnit.module('can-react-component', () => {
+QUnit.module('can-react-component', (moduleHooks) => {
+
+	const container = document.getElementById("qunit-fixture");
+
+	moduleHooks.afterEach(() => {
+		ReactDOM.unmountComponentAtNode(container);
+	});
 
 	QUnit.test('should be able to consume components', (assert) => {
 
@@ -49,9 +55,8 @@ QUnit.module('can-react-component', () => {
 			})
 		);
 
-		const testInstance = ReactTestUtils.renderIntoDocument( <ConsumedComponent last="Baker" /> );
-		const divComponent = ReactTestUtils.findRenderedDOMComponentWithTag( testInstance, 'consumed-component1' );
-
+		const testInstance = ReactDOM.render(<ConsumedComponent last="Baker" />, container);
+		const divComponent = document.getElementsByTagName('consumed-component1')[0];
 		assert.equal(testInstance.constructor.name, 'ConsumedComponent');
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
 		testInstance.viewModel.first = 'Yetti';
@@ -82,8 +87,8 @@ QUnit.module('can-react-component', () => {
 			})
 		);
 
-		const testInstance = ReactTestUtils.renderIntoDocument( <ConsumedComponent last="Baker" /> );
-		const divComponent = ReactTestUtils.findRenderedDOMComponentWithTag( testInstance, 'consumed-component2' );
+		const testInstance = ReactDOM.render(<ConsumedComponent last="Baker" />, container);
+		const divComponent = document.getElementsByTagName('consumed-component2')[0];
 
 		assert.equal(testInstance.constructor.name, 'ConsumedComponentWrapper');
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
@@ -132,8 +137,8 @@ QUnit.module('can-react-component', () => {
 			}
 		}
 
-		const wrappingInstance = ReactTestUtils.renderIntoDocument( <WrappingComponent /> );
-		const divComponent = ReactTestUtils.findRenderedDOMComponentWithTag( wrappingInstance, 'consumed-component3' );
+		const wrappingInstance = ReactDOM.render(<WrappingComponent />, container);
+		const divComponent = document.getElementsByTagName('consumed-component3')[0];
 
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
 		wrappingInstance.changeState();
