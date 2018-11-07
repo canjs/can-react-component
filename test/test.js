@@ -55,11 +55,13 @@ QUnit.module('can-react-component', (moduleHooks) => {
 			})
 		);
 
-		const testInstance = ReactDOM.render(<ConsumedComponent last="Baker" />, container);
+		const testInstanceRef = React.createRef();
+		
+		ReactDOM.render(<ConsumedComponent last="Baker" ref={testInstanceRef} />, container);
 		const divComponent = document.getElementsByTagName('consumed-component1')[0];
-		assert.equal(testInstance.constructor.name, 'ConsumedComponent');
+		assert.equal(testInstanceRef.current.constructor.name, 'ConsumedComponent');
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
-		testInstance.viewModel.first = 'Yetti';
+		testInstanceRef.current.viewModel.first = 'Yetti';
 		assert.equal(getTextFromFrag(divComponent), 'Yetti Baker');
 
 	});
@@ -87,10 +89,11 @@ QUnit.module('can-react-component', (moduleHooks) => {
 			})
 		);
 
-		const testInstance = ReactDOM.render(<ConsumedComponent last="Baker" />, container);
+		const testInstanceRef = React.createRef();
+		ReactDOM.render(<ConsumedComponent last="Baker" ref={testInstanceRef} />, container);
 		const divComponent = document.getElementsByTagName('consumed-component2')[0];
 
-		assert.equal(testInstance.constructor.name, 'ConsumedComponentWrapper');
+		assert.equal(testInstanceRef.current.constructor.name, 'ConsumedComponentWrapper');
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
 
 	});
@@ -137,11 +140,12 @@ QUnit.module('can-react-component', (moduleHooks) => {
 			}
 		}
 
-		const wrappingInstance = ReactDOM.render(<WrappingComponent />, container);
+		const wrappingInstanceRef = React.createRef();
+		ReactDOM.render(<WrappingComponent ref={wrappingInstanceRef} />, container);
 		const divComponent = document.getElementsByTagName('consumed-component3')[0];
 
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
-		wrappingInstance.changeState();
+		wrappingInstanceRef.current.changeState();
 		assert.equal(getTextFromFrag(divComponent), 'Yetti Baker');
 
 	});
