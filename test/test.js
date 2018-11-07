@@ -1,7 +1,6 @@
 import QUnit from 'steal-qunit';
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import DefineMap from 'can-define/map/map';
 import CanComponent from 'can-component';
 import stache from 'can-stache';
 // old stealjs does not seem to handle named exports properly
@@ -33,30 +32,28 @@ QUnit.module('can-react-component', (moduleHooks) => {
 
 	QUnit.test('should be able to consume components', (assert) => {
 
-		let ViewModel = DefineMap.extend('ViewModel', {
-			first: {
-				type: 'string',
-				default: 'Christopher'
-			},
-			last: 'string',
-			name: {
-				get() {
-					return this.first + ' ' + this.last;
-				}
-			}
-		});
-
 		const ConsumedComponent = canReactComponent(
 			'ConsumedComponent',
 			CanComponent.extend('ConsumedComponent', {
 				tag: "consumed-component1",
-				ViewModel: ViewModel,
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Christopher'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					}
+				},
 				view: stache("<div class='inner'>{{name}}</div>")
 			})
 		);
 
 		const testInstanceRef = React.createRef();
-		
+
 		ReactDOM.render(<ConsumedComponent last="Baker" ref={testInstanceRef} />, container);
 		const divComponent = document.getElementsByTagName('consumed-component1')[0];
 		assert.equal(testInstanceRef.current.constructor.name, 'ConsumedComponent');
@@ -68,23 +65,21 @@ QUnit.module('can-react-component', (moduleHooks) => {
 
 	QUnit.test('should work without a displayName', (assert) => {
 
-		let ViewModel = DefineMap.extend('ViewModel', {
-			first: {
-				type: 'string',
-				default: 'Christopher'
-			},
-			last: 'string',
-			name: {
-				get() {
-					return this.first + ' ' + this.last;
-				}
-			}
-		});
-
 		const ConsumedComponent = canReactComponent(
 			CanComponent.extend('ConsumedComponent', {
 				tag: "consumed-component2",
-				ViewModel: ViewModel,
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Christopher'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					}
+				},
 				view: stache("<div class='inner'>{{name}}</div>")
 			})
 		);
@@ -100,23 +95,21 @@ QUnit.module('can-react-component', (moduleHooks) => {
 
 	QUnit.test('should update the component when new props are received', (assert) => {
 
-		let ViewModel = DefineMap.extend('ViewModel', {
-			first: {
-				type: 'string',
-				default: 'Christopher'
-			},
-			last: 'string',
-			name: {
-				get() {
-					return this.first + ' ' + this.last;
-				}
-			}
-		});
-
 		const ConsumedComponent = canReactComponent(
 			CanComponent.extend('ConsumedComponent', {
 				tag: "consumed-component3",
-				ViewModel: ViewModel,
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Christopher'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					}
+				},
 				view: stache("<div class='inner'>{{name}}</div>")
 			})
 		);
