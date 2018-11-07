@@ -30,12 +30,12 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 
 			if (el) {
 				this.vm = el[viewModelSymbol];
-				this.vm.assign(this.props);
+				this.vm && this.vm.assign(this.props);
 			}
 		},
 
 		componentWillUpdate: function(props) {
-			this.vm.assign(props);
+			this.vm && this.vm.assign(props);
 		},
 
 		render: function() { // eslint-disable-line react/display-name
