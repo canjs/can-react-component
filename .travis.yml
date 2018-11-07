@@ -1,7 +1,7 @@
 language: node_js
 node_js: node
 addons:
-  firefox: '60.0'
+  firefox: '63.0'
 script: npm test
 before_install:
   - "export DISPLAY=:99.0"
