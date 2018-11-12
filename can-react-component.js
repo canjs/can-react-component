@@ -1,7 +1,9 @@
 var React = require("react");
-var Scope = require("can-view-scope");
+var namespace = require("can-namespace");
 var assign = require("can-assign");
-var namespace = require('can-namespace');
+var reflect = require("can-reflect");
+var canSymbol = require("can-symbol");
+var viewModelSymbol = canSymbol.for("can.viewModel");
 
 module.exports = namespace.reactComponent = function canReactComponent(displayName, CanComponent) {
 	if (arguments.length === 1) {
@@ -28,22 +30,13 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 			}
 
 			if (el) {
-				this.canComponent = new CanComponent(el, {
-					subtemplate: null,
-					templateType: "react",
-					parentNodeList: undefined,
-					options: new Scope().addTemplateContext(),
-					scope: new Scope({}),
-					setupBindings: function(el, makeViewModel, initialViewModelData) {
-						assign(initialViewModelData, this.props);
-						makeViewModel(initialViewModelData);
-					}.bind(this),
-				});
+				this.vm = el[viewModelSymbol];
+				this.vm && reflect.assign(this.vm, this.props);
 			}
 		},
 
-		componentWillUpdate: function(props) {
-			this.canComponent.viewModel.assign(props);
+		componentDidUpdate: function() {
+			this.vm && reflect.assign(this.vm, this.props);
 		},
 
 		render: function() { // eslint-disable-line react/display-name
@@ -57,7 +50,7 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 		enumerable: false,
 		configurable: true,
 		get: function() {
-			return this.canComponent && this.canComponent.viewModel;
+			return this.vm;
 		}
 	});
 

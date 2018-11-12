@@ -1,7 +1,6 @@
 import QUnit from 'steal-qunit';
-import React /*, { Component } */ from 'react';
-import ReactTestUtils from 'react-dom/test-utils';
-import DefineMap from 'can-define/map/map';
+import React from 'react';
+import ReactDOM  from 'react-dom';
 import CanComponent from 'can-component';
 import stache from 'can-stache';
 // old stealjs does not seem to handle named exports properly
@@ -23,92 +22,94 @@ function getTextFromFrag(node) {
 	return txt;
 }
 
-QUnit.module('can-react-component', () => {
+QUnit.module('can-react-component', (moduleHooks) => {
+
+	const container = document.getElementById("qunit-fixture");
+
+	moduleHooks.afterEach(() => {
+		ReactDOM.unmountComponentAtNode(container);
+	});
 
 	QUnit.test('should be able to consume components', (assert) => {
-
-		let ViewModel = DefineMap.extend('ViewModel', {
-			first: {
-				type: 'string',
-				default: 'Christopher'
-			},
-			last: 'string',
-			name: {
-				get() {
-					return this.first + ' ' + this.last;
-				}
-			}
-		});
 
 		const ConsumedComponent = canReactComponent(
 			'ConsumedComponent',
 			CanComponent.extend('ConsumedComponent', {
 				tag: "consumed-component1",
-				ViewModel: ViewModel,
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Christopher'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					}
+				},
 				view: stache("<div class='inner'>{{name}}</div>")
 			})
 		);
 
-		const testInstance = ReactTestUtils.renderIntoDocument( <ConsumedComponent last="Baker" /> );
-		const divComponent = ReactTestUtils.findRenderedDOMComponentWithTag( testInstance, 'consumed-component1' );
+		const testInstanceRef = React.createRef();
 
-		assert.equal(testInstance.constructor.name, 'ConsumedComponent');
+		ReactDOM.render(<ConsumedComponent last="Baker" ref={testInstanceRef} />, container);
+		const divComponent = document.getElementsByTagName('consumed-component1')[0];
+		assert.equal(testInstanceRef.current.constructor.name, 'ConsumedComponent');
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
-		testInstance.viewModel.first = 'Yetti';
+		testInstanceRef.current.viewModel.first = 'Yetti';
 		assert.equal(getTextFromFrag(divComponent), 'Yetti Baker');
 
 	});
 
 	QUnit.test('should work without a displayName', (assert) => {
 
-		let ViewModel = DefineMap.extend('ViewModel', {
-			first: {
-				type: 'string',
-				default: 'Christopher'
-			},
-			last: 'string',
-			name: {
-				get() {
-					return this.first + ' ' + this.last;
-				}
-			}
-		});
-
 		const ConsumedComponent = canReactComponent(
 			CanComponent.extend('ConsumedComponent', {
 				tag: "consumed-component2",
-				ViewModel: ViewModel,
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Christopher'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					}
+				},
 				view: stache("<div class='inner'>{{name}}</div>")
 			})
 		);
 
-		const testInstance = ReactTestUtils.renderIntoDocument( <ConsumedComponent last="Baker" /> );
-		const divComponent = ReactTestUtils.findRenderedDOMComponentWithTag( testInstance, 'consumed-component2' );
+		const testInstanceRef = React.createRef();
+		ReactDOM.render(<ConsumedComponent last="Baker" ref={testInstanceRef} />, container);
+		const divComponent = document.getElementsByTagName('consumed-component2')[0];
 
-		assert.equal(testInstance.constructor.name, 'ConsumedComponentWrapper');
+		assert.equal(testInstanceRef.current.constructor.name, 'ConsumedComponentWrapper');
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
 
 	});
 
 	QUnit.test('should update the component when new props are received', (assert) => {
 
-		let ViewModel = DefineMap.extend('ViewModel', {
-			first: {
-				type: 'string',
-				default: 'Christopher'
-			},
-			last: 'string',
-			name: {
-				get() {
-					return this.first + ' ' + this.last;
-				}
-			}
-		});
-
 		const ConsumedComponent = canReactComponent(
 			CanComponent.extend('ConsumedComponent', {
 				tag: "consumed-component3",
-				ViewModel: ViewModel,
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Christopher'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					}
+				},
 				view: stache("<div class='inner'>{{name}}</div>")
 			})
 		);
@@ -132,11 +133,12 @@ QUnit.module('can-react-component', () => {
 			}
 		}
 
-		const wrappingInstance = ReactTestUtils.renderIntoDocument( <WrappingComponent /> );
-		const divComponent = ReactTestUtils.findRenderedDOMComponentWithTag( wrappingInstance, 'consumed-component3' );
+		const wrappingInstanceRef = React.createRef();
+		ReactDOM.render(<WrappingComponent ref={wrappingInstanceRef} />, container);
+		const divComponent = document.getElementsByTagName('consumed-component3')[0];
 
 		assert.equal(getTextFromFrag(divComponent), 'Christopher Baker');
-		wrappingInstance.changeState();
+		wrappingInstanceRef.current.changeState();
 		assert.equal(getTextFromFrag(divComponent), 'Yetti Baker');
 
 	});
