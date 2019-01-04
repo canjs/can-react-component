@@ -31,7 +31,12 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 
 			if (el) {
 				this.vm = el[viewModelSymbol];
-				this.vm && reflect.assign(this.vm, this.props);
+				if(this.vm) {
+					reflect.assign(this.vm, this.props);
+				} else {
+					this.canComponent = new CanComponent(el, {viewModel: this.props});
+					this.vm = this.canComponent.viewModel;
+				}
 			}
 		},
 
