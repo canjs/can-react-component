@@ -3,6 +3,7 @@ var namespace = require("can-namespace");
 var assign = require("can-assign");
 var reflect = require("can-reflect");
 var canSymbol = require("can-symbol");
+var viewCallbacks = require("can-view-callbacks");
 var viewModelSymbol = canSymbol.for("can.viewModel");
 
 module.exports = namespace.reactComponent = function canReactComponent(displayName, CanComponent) {
@@ -10,6 +11,13 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 		CanComponent = arguments[0];
 		displayName = (CanComponent.shortName || "CanComponent") + "Wrapper";
 	}
+
+	const __renderComponent = viewCallbacks._tags[CanComponent.prototype.tag];
+	viewCallbacks._tags[CanComponent.prototype.tag]= function renderComponent(el){
+		if(el.getAttribute("auto-mount") !== "false"){
+			__renderComponent.apply(this, arguments);
+		}
+	};
 
 	function Wrapper() {
 		React.Component.call(this);
@@ -47,6 +55,7 @@ module.exports = namespace.reactComponent = function canReactComponent(displayNa
 		render: function() { // eslint-disable-line react/display-name
 			return React.createElement(CanComponent.prototype.tag, {
 				ref: this.createComponent,
+				"auto-mount": "false"
 			});
 		}
 	});

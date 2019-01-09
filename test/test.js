@@ -143,4 +143,42 @@ QUnit.module('can-react-component', (moduleHooks) => {
 
 	});
 
+
+	QUnit.test('should be rendered only once', (assert) => {
+		assert.expect(3);
+		const ConsumedComponent = canReactComponent(
+			'ConsumedComponent',
+			CanComponent.extend('ConsumedComponent', {
+				tag: "consumed-component4",
+				ViewModel: {
+					first: {
+						type: 'string',
+						default: 'Ivo'
+					},
+					last: 'string',
+					name: {
+						get() {
+							return this.first + ' ' + this.last;
+						}
+					},
+					connectedCallback(el){
+						if(el.getAttribute("auto-mount") === "false") {
+							assert.equal(this.last, "Pinheiro", `'last' name should be 'Pinheiro'`);
+						}
+					}
+				},
+				view: stache("<div class='inner'>{{name}}</div>")
+			})
+		);
+
+		container.innerHTML="<consumed-component4></consumed-component4>";
+
+		let divComponent = document.querySelector('consumed-component4');
+		assert.equal(getTextFromFrag(divComponent), 'Ivo undefined');
+
+		ReactDOM.render(<ConsumedComponent last={"Pinheiro"} />, container);
+		divComponent = document.querySelector('consumed-component4');
+		assert.equal(getTextFromFrag(divComponent), 'Ivo Pinheiro');
+	});
+
 });
