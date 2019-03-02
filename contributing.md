@@ -1,6 +1,6 @@
 Thank you for contributing to Can-React-Component!
 
-If you need any help setting up a CanJS development environment and fixing Can-React-Component bugs, please reach out to us on the [canjs/canjs Gitter channel](https://gitter.im/canjs/canjs) or email (contact@bitovi.com).  We will happily walk you through setting up a the environment, creating a test, and submitting a pull request.
+If you need any help setting up a CanJS development environment and fixing Can-React-Component bugs, please reach out to us on [Slack](https://www.bitovi.com/community/slack) ([#canjs channel](https://bitovi-community.slack.com/messages/CFC22NZ8A)) or email (contact@bitovi.com).  We will happily walk you through setting up a the environment, creating a test, and submitting a pull request.
 
 ## Reporting Bugs
 
@@ -8,7 +8,7 @@ To report a bug, please visit [GitHub Issues](/canjs/can-react-component/issues)
 
 When filing a bug, it is helpful to include small examples using tools like [JSBin][1] or [CodePen][2].
 
-Search for previous tickets, if there is one add to that one rather than creating another. You can also post on the [Forums](http://forums.donejs.com/c/canjs) or talk to us in [gitter canjs/canjs channel](https://gitter.im/canjs/canjs).
+Search for previous tickets, if there is one add to that one rather than creating another. You can also post on the [Forums](https://forums.bitovi.com/c/canjs) or talk to us on [Slack](https://www.bitovi.com/community/slack) ([#canjs channel](https://bitovi-community.slack.com/messages/CFC22NZ8A)).
 
 ## Contributing
 
