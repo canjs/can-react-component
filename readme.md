@@ -11,7 +11,7 @@ Create a React component out of a Can component.
 
 ## Documentation
 
-Read the [can-react-component API docs on CanJS.com](https://canjs.com/doc/can-react-component.html).
+Read the [can-react-component API docs on CanJS.com](https://v3.canjs.com/doc/can-react-component.html).
 
 ## Changelog
 
