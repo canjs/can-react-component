@@ -47,7 +47,7 @@
     "can-component": "^5.0.0",
     "can-stache": "^5.0.0",
     "detect-cyclic-packages": "^1.1.0",
-    "eslint": "^3.18.0",
+    "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
