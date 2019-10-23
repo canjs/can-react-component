@@ -25,7 +25,6 @@
     "release:major": "npm version major && npm publish",
     "prepublish": "npm run build",
     "build": "node build.js",
-    "develop": "done-serve --static --develop --port 8080",
     "detect-cycle": "detect-cyclic-packages --ignore done-serve"
   },
   "main": "can-react-component",
@@ -36,19 +35,18 @@
     "react"
   ],
   "dependencies": {
-    "can-assign": "^1.3.1",
+    "can-assign": "^1.3.3",
     "can-namespace": "^1.0.0",
     "can-reflect": "^1.17.6",
-    "can-symbol": "^1.6.1",
-    "can-view-callbacks": "^4.3.6"
+    "can-symbol": "^1.6.5",
+    "can-view-callbacks": "^5.0.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "bit-docs": "0.0.11",
-    "can-component": "^4.3.0",
-    "can-stache": "^4.10.3",
+    "can-component": "^5.0.0",
+    "can-stache": "^5.0.0",
     "detect-cyclic-packages": "^1.1.0",
-    "done-serve": "^2.3.0",
     "eslint": "^3.18.0",
     "eslint-plugin-react": "^7.0.1",
     "react": "^16.0.0",
@@ -61,19 +59,5 @@
   },
   "peerDependencies": {
     "react": "16.x"
-  },
-  "steal": {
-    "main": "can-react-component",
-    "configDependencies": [
-      "live-reload"
-    ],
-    "npmIgnore": [
-      "babel-eslint",
-      "bit-docs",
-      "done-serve",
-      "eslint",
-      "eslint-plugin-react",
-      "testee"
-    ]
   }
 }
