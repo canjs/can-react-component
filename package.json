@@ -49,8 +49,8 @@
     "detect-cyclic-packages": "^1.1.0",
     "eslint": "^6.5.1",
     "eslint-plugin-react": "^7.0.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "steal": "^2.1.1",
     "steal-builtins": "^1.0.0",
     "steal-qunit": "^2.0.0",
@@ -58,6 +58,6 @@
     "testee": "^0.9.1"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "17.x"
   }
 }
